@@ -4,12 +4,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Proyecto Web</title>
+<head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
-<body>
 
-<h1>Holaaa</h1>
-<h2>Holaaa</h2>
-<h3>Holaaa</h3>
+<body>
+        <h1></h1>
+        
 </body>
+        
 </html>

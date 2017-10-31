@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import datos.DBJugador;
+import logica.Jugador;
+
 /**
  * Servlet implementation class Inicio
  */
@@ -51,6 +54,12 @@ public class Inicio extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        DBJugador conJugador = new DBJugador();
+        
+        Jugador jugador = new Jugador();
+        
+        request.setAttribute("nombreJugador", jugador);
+        
         /*DBContactos conDb = new DBContactos();
         try {
             ResultSet res = conDb.getContactos();
