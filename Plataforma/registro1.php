@@ -48,11 +48,16 @@ $href = "registrar.php";
     //</script>';
 
 } ?>
+	<div class="contenedor" >
+			<ul>
+			  <li><a class="principal" > UD Juegos </a></li>
+			  <li><a href="index.php" >Inicio</a></li>
+			  <li><a class="active" href="registro.php"> Registro</a></li>
+			  <li><a href="puntajes.php"> Puntajes</a></li>
+			</ul>	
+	</div>
 	<br><br><br><br>
 	
-	<img src="imagenes/form.png" alt = "form">
-	<h1>Registro</h1>
-						
 	<div>
 		<form action="registro.php" method="POST">
 	 	 	<label for="Nombre"><b>Nombre</b></label><br>

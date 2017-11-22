@@ -1,30 +1,31 @@
+<?php 
+//session_start();
+if(isset($_SESSION["session_username"])) {?>
+	<p><a href="cerrarsesion.php">Finalice</a> sesión aquí!</p>
+	<?php
+} 
+?>
 <?php include("includes/encabezado.php"); ?>
-	<div class="contenedor" >
-			<ul>
-			  <li><a class="principal" > UD Juegos </a></li>
-			  <li><a href="index.php" >Inicio</a></li>
-			  <li><a href="registro.php"> Registro</a></li>
-			  <li><a class="active" href="puntajes.php"> Puntajes</a></li>
-			</ul>	
-	</div>
-	<br><br><br><br><br>
+<?php include("includes/conexion.php"); ?>
+	
+	<br><br><br>
 	<center>
 		<img src="imagenes/trophy.png" alt = "trophy">
-		<h1>Registro de Puntuaciones</h1>
+		<h1>Puntuaciones</h1>
 
 	</center>
 
 	<?php
-	$conexion = mysqli_connect("localhost", "root", "", "plataforma");
 
 	if($conexion){
 
-
-		$select = "SELECT puntaje.puntaje,jugador.gamertag_jugador,juego.n_juego,jugador.nombre_jugador,jugador.apellido_jugador,puntaje.fecha_puntaje from puntaje INNER JOIN jugador ON puntaje.id_jugador = jugador.id_jugador INNER JOIN juego ON puntaje.id_juego = juego.id_juego ORDER BY puntaje DESC";
+		$select = "SELECT puntaje.puntaje,jugador.gamertag_jugador,juego.n_juego,jugador.nombre_jugador,jugador.apellido_jugador,puntaje.fecha_puntaje, jugador.pais from puntaje INNER JOIN jugador ON puntaje.id_jugador = jugador.id_jugador INNER JOIN juego ON puntaje.id_juego = juego.id_juego ORDER BY juego.n_juego,puntaje DESC";
 		$resultadoSql =mysqli_query($conexion, $select);
+	}else{
+		echo '<script> alert("Error de conexion")</script>';
 	}
 	?>
-
+<center>
 	<section><table width="70%" border="0">
   <tbody>
     <tr>
@@ -34,6 +35,7 @@
       <td width="20%" class="titulos"><strong>Nombre</strong></td>
       <td width="20%" class="titulos"><strong>Apellido</strong></td>
       <td width="80%" class="titulos"><strong>Fecha</strong></td>
+      <td width="80%" class="titulos"><strong>Pais</strong></td>
     </tr>
 	<?php
 while($fila1 = mysqli_fetch_assoc($resultadoSql)){
@@ -56,11 +58,15 @@ while($fila1 = mysqli_fetch_assoc($resultadoSql)){
 	echo "</td>";
 	echo "<td class='titulos2'>";
 	echo $fila1['fecha_puntaje'];
+	echo "</td>";
+	echo "<td class='titulos2'>";
+	echo $fila1['pais'];
 	}
 	?>
 
 
 </table>
+</center>
 </section>
 </body>
 </html>

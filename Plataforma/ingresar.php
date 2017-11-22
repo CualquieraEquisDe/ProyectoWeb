@@ -1,43 +1,73 @@
+<?php
+//session_start();
+if(isset($_SESSION["session_username"])) {
+	header("location:index.php");
+} else {
+?>
+<?php include("includes/encabezado.php"); ?>
 <?php require_once("includes/conexion.php"); ?>
 
-<html>
-	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-	<link rel="icon" type="image/png" href="imagenes/icon.png" />
-	<head>
-		<title>UD Juegos</title>
-		<link href="estilo/estilo.css" rel="stylesheet" type="text/css"> 
-		
-	</head>
-	<body>
+<?php
 
-	<div class="contenedor" >
-			<ul>
-			  <li><a class="principal" > UD Juegos </a></li>
-			  <li><a href="index.html" >Inicio</a></li>
-			  <li><a href="registro.php"> Registro</a></li>
-			  <li><a href="puntajes.php"> Puntajes</a></li>
-			  <li><a class="active" href="ingresar">Ingresar</b></li>
-			</ul>	
-	</div>
-	<br><br><br><br>
+if(isset($_POST["ingresar"])){
 
-	<center><img src="imagenes/man.png" alt = "man"></center><br>
+	if(!empty($_POST['GamerTag']) && !empty($_POST['Password'])) {
+		$GamerTag = $_POST['GamerTag'];
+		$Password = $_POST['Password'];
 
-	<div>
-		<form name = "loginform" id = "loginform" action = "" method="POST">
-	    	<label for="GamerTag"><b>GamerTag</b></label><br>
-	    	<input type="text" id="entrada" name="GamerTag" placeholder="GamerTag"><br>
+		$query =mysqli_query($conexion, "SELECT * FROM jugador WHERE gamertag_jugador='".$GamerTag."' AND password_jugador='".$Password."'");
 
-	    	<label for="Password"><b>Password</b></label><br>
-	    	<input type="Password" id="entrada" name="Password" placeholder="Password"><br>
-	    
-	    	<button type="submit" name="submit" class="convertir">Ingresar</button>
-	    </form>
-	</div>
+    	$numrows=mysqli_num_rows($query);
+
+    	if($numrows!=0){
+    		while($row=mysqli_fetch_assoc($query)){
+    			$dbgamertag=$row['gamertag_jugador'];
+    			$dbpassword=$row['password_jugador'];
+    			$dbid=$row['id_jugador'];
+    			
+    		}
+    		if($GamerTag == $dbgamertag && $Password == $dbpassword){
+    			$_SESSION['session_username']=$GamerTag;
+
+    			$_SESSION['session_iduser']=$dbid;
+    			$Usuario = $_SESSION['session_username'];
+    			echo '<script>alert("Bienvenido")</script>';
+    			/* Redirect browser */
+    			header("Location: index.php");
+    		}
+    	}else{
+    		$message =  "Nombre de usuario ó contraseña invalida!";
+    	}
+
+	}else{
+    	$message = "Todos los campos son requeridos!";
+    	
+	}
+	if(isset($message)){
+		echo '<script>alert("'.$message.'")</script>';	
+	}
 	
-	<div>
-		
+
+}	
+?>
+			
+	<br><br><br>
+		<form action="ingresar.php" method="POST">
+	 	 	<label for="gamertag_jugador"><b>GamerTag</b></label><br>
+	   		<input type="text" id="entrada" name="GamerTag" placeholder="GamerTag"><br>
+			<br>
+			<label for="Password"><b>Contraseña</b></label><br>
+	   		<input type="password" id="entrada" name="Password" placeholder="Contraseña"><br>
+			<br>	    
+	    	<button type="submit" name="ingresar" id = "ingresar" class="convertir">Ingresar</button>
+	    	
+	    	<p class="regtext">¿No estas registrado? Registrate<a href="registro.php" > Aquí</a></p>
+	 
+	    <br><br>
+	    </form>
 	</div>
 
 	</body>
-</html>
+</html><?php
+}
+?>
