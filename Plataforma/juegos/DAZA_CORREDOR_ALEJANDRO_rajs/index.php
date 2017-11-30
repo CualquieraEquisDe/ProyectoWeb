@@ -221,10 +221,8 @@
 						$_jugador = "0";
 					}
 					?>
-					<br>
         <form action = "http://localhost/plataforma/puntos.php" method="POST">
 			<input  type = "hidden" id ="id_Juego" name="id_Juego" value="3" >
-
 			<input  type = "hidden" id ="id_Jugador" name="id_Jugador" value= <?php echo $_jugador ?> > 
 			<input  type = "hidden" id ="puntaje" name="puntaje" > 
    			<input class = "jugar" id="subir" type="submit" name="subir" value="Subir"> </input> <br>
