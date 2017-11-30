@@ -2,7 +2,7 @@
 	font-family: Arial;
 }
 body {
-	background: #E6E8FA;
+	/*background: #E6E8FA;*/
 	text-align: center;
 	margin:0 auto;
 }
@@ -12,6 +12,7 @@ header {
     padding: 10px 0;
     width: 100%;
     background-color: #f1f1f1;
+    background-color: #555;
 }
 
 
@@ -32,8 +33,15 @@ header nav a#ingresar {
 	background-color: #555;
 }
 
+.encabezado{
+    margin: 0;
+    padding: 0;
+    width: 992px;
+    background-color: #555;
+}
+
 .principal{
-	background-color: #4CAF50;	
+	background-color: #555555;	
 }
 
 header nav a {
